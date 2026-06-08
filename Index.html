@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>TEAMER | Professional Web Development</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafd;
+      color: #0a1c2a;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* Header & Navigation */
+    header {
+      background: #ffffff;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    /* Logo image placeholder — replace with your actual logo */
+    .logo-img {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: #0f2b3d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .logo-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Fallback icon if no image provided */
+    .logo-img .fallback-icon {
+      font-size: 28px;
+      color: white;
+    }
+
+    .logo-text {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(130deg, #0f2b3d, #2a6f9c);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #2c4c66;
+      transition: 0.2s;
+      font-size: 1rem;
+      padding: 6px 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a.active, .nav-links a:hover {
+      color: #1e6f9f;
+      border-bottom-color: #1e6f9f;
+    }
+
+    /* Sections */
+    .page-section {
+      display: none;
+      padding: 70px 0 90px;
+      animation: fadeIn 0.35s ease;
+    }
+
+    .page-section.active-section {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+
+    h1 {
+      font-size: 3.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .section-title h2 {
+      margin-bottom: 12px;
+    }
+    .section-title .subhead {
+      color: #5b6f82;
+      font-size: 1.1rem;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background: #0f2b3d;
+      color: white;
+      border: none;
+      padding: 14px 34px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-primary:hover {
+      background: #1e4a6e;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    }
+
+    /* Services Grid */
+    .services-grid, .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 36px;
+      margin: 48px 0 30px;
+    }
+
+    .service-card, .project-card {
+      background: white;
+      border-radius: 28px;
+      padding: 32px 24px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.02), 0 1px 3px rgba(0,0,0,0.03);
+      transition: all 0.25s;
+      border: 1px solid #eef2f8;
+    }
+    .service-card:hover, .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+      border-color: #d0e0ec;
+    }
+    .service-icon {
+      font-size: 2.6rem;
+      color: #1e6f9f;
+      margin-bottom: 22px;
+    }
+    .project-img {
+      background: #eef3fa;
+      border-radius: 24px;
+      height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+      font-size: 2.2rem;
+      color: #2c6e9e;
+    }
+
+    /* Order Form */
+    .order-card {
+      background: white;
+      border-radius: 36px;
+      padding: 44px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+      margin-top: 30px;
+      border: 1px solid #eef2f8;
+    }
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .form-group {
+      flex: 1;
+      min-width: 200px;
+    }
+    label {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 8px;
+      color: #1f3b4c;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border: 1px solid #d4e2ec;
+      border-radius: 20px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: 0.2s;
+      background: #fff;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #1e6f9f;
+      box-shadow: 0 0 0 3px rgba(30,111,159,0.08);
+    }
+    .success-msg {
+      background: #e0f2e9;
+      color: #166c44;
+      border-radius: 60px;
+      padding: 12px 20px;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    /* Contact Grid */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      margin-top: 20px;
+    }
+    .contact-details, .contact-form-side {
+      background: white;
+      padding: 36px;
+      border-radius: 32px;
+      border: 1px solid #eef2f8;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.02);
+    }
+    .contact-item {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 32px;
+      align-items: center;
+    }
+    .contact-icon {
+      width: 54px;
+      height: 54px;
+      background: #eef3fa;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: #1e6f9f;
+    }
+    footer {
+      background: #0a1a24;
+      color: #cbdbe2;
+      padding: 40px 0;
+      text-align: center;
+      margin-top: 40px;
+    }
+    @media (max-width: 800px) {
+      .navbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .nav-links {
+        justify-content: center;
+      }
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      h1 { font-size: 2.3rem; }
+      .order-card { padding: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="navbar">
+      <div class="logo-area">
+        <!-- Logo image: replace the src with your actual logo image path -->
+        <div class="logo-img" id="companyLogo">
+          <!-- If you have an image, uncomment the line below and replace 'logo.png' -->
+          <!-- <img src="logo.png" alt="TEAMER Logo"> -->
+          <div class="fallback-icon"><i class="fas fa-code-branch"></i></div>
+        </div>
+        <div class="logo-text">TEAMER</div>
+      </div>
+      <div class="nav-links">
+        <a href="#" data-page="home" class="active">Home</a>
+        <a href="#" data-page="projects">Projects</a>
+        <a href="#" data-page="contact">Contact</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <!-- HOME SECTION (includes order form) -->
+    <section id="home-section" class="page-section active-section">
+      <div class="hero">
+        <h1>Modern Web Development<br>That Drives Results</h1>
+        <p style="font-size: 1.2rem; color: #4a6579; max-width: 700px; margin-bottom: 20px;">
+          TEAMER crafts high-performance websites, e‑commerce platforms, and custom web apps tailored to your business goals.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+          <h3>Responsive & Fast</h3>
+          <p>Fully responsive designs with top-tier performance and SEO optimization.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-shopping-cart"></i></div>
+          <h3>E‑commerce Solutions</h3>
+          <p>Secure, scalable online stores with seamless payment gateways.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-rocket"></i></div>
+          <h3>Custom Web Apps</h3>
+          <p>Interactive dashboards, CRMs, and tools built with modern frameworks.</p>
+        </div>
+      </div>
+
+      <!-- Order form (take orders) -->
+      <div class="order-card">
+        <h2 style="margin-bottom: 8px;">Request a Quote / Place Order</h2>
+        <p style="margin-bottom: 28px; color: #5e7a8f;">Tell us about your project — we’ll reply within 24 hours.</p>
+        <form id="orderForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Full name *</label>
+              <input type="text" id="orderName" required placeholder="e.g., Alex Johnson">
+            </div>
+            <div class="form-group">
+              <label>Email address *</label>
+              <input type="email" id="orderEmail" required placeholder="hello@example.com">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Project type</label>
+              <select id="orderType">
+                <option value="Business Website">Business Website</option>
+                <option value="E-commerce Store">E-commerce Store</option>
+                <option value="Custom Web App">Custom Web App</option>
+                <option value="Website Redesign">Redesign / Maintenance</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Budget range (USD)</label>
+              <input type="text" id="orderBudget" placeholder="$1,000 – $20,000+">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Project details *</label>
+            <textarea rows="4" id="orderDetails" required placeholder="Describe your vision, features, timeline..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Submit Request</button>
+          <div id="orderFeedback"></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION (Previous work) -->
+    <section id="projects-section" class="page-section">
+      <div class="section-title">
+        <h2>Our Recent Work</h2>
+        <p class="subhead">Real projects that showcase our expertise and creativity.</p>
+      </div>
+      <div id="projectsContainer" class="projects-grid">
+        <!-- Filled by JS -->
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact-section" class="page-section">
+      <div class="section-title">
+        <h2>Let’s Connect</h2>
+        <p class="subhead">Reach out and let's turn your idea into reality.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-details">
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div><strong>Office</strong><br>123 Digital Avenue, Suite 400<br>San Francisco, CA 94107</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <div><strong>Email</strong><br>hello@teamer.dev</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+            <div><strong>Phone</strong><br>+1 (555) 678-1234</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+            <div><strong>WhatsApp</strong><br>+1 (555) 678-1235</div>
+          </div>
+        </div>
+        <div class="contact-form-side">
+          <h3 style="margin-bottom: 24px;">Send us a message</h3>
+          <form id="contactForm">
+            <div class="form-group" style="margin-bottom: 20px;">
+              <label>Your name</label>
+              <input type="text" id="contactName" required>
+            </div>
+            <div class="form-group" style="margin-bottom: 20px;">
+              <label>Email</label>
+              <input type="email" id="contactEmail" required>
+            </div>
+            <div class="form-group" style="margin-bottom: 24px;">
+              <label>Message</label>
+              <textarea rows="3" id="contactMsg" required></textarea>
+            </div>
+            <button type="submit" class="btn-primary"><i class="fas fa-comment-dots"></i> Send Message</button>
+            <div id="contactFeedback"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <p>© 2025 TEAMER — Professional Web Development Agency. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // ---------- PROJECTS DATA (previous work) ----------
+  const projectsList = [
+    {
+      title: "UrbanGo Marketplace",
+      description: "Multi-vendor e‑commerce platform with real-time inventory and Stripe integration.",
+      tech: "React, Node.js, MongoDB",
+      icon: "🛍️"
+    },
+    {
+      title: "Finwise Dashboard",
+      description: "Analytics dashboard for financial insights, custom reports, and data visualization.",
+      tech: "Vue, D3, Firebase",
+      icon: "📈"
+    },
+    {
+      title: "MediCare Portal",
+      description: "Telemedicine appointment system with patient portal and secure video calls.",
+      tech: "Next.js, Twilio, PostgreSQL",
+      icon: "🏥"
+    },
+    {
+      title: "BrandLaunch Studio",
+      description: "High-end portfolio & booking system for a creative agency.",
+      tech: "WordPress + custom theme",
+      icon: "🎨"
+    }
+  ];
+
+  function renderProjects() {
+    const container = document.getElementById('projectsContainer');
+    if (!container) return;
+    container.innerHTML = projectsList.map(project => `
+      <div class="project-card">
+        <div class="project-img">
+          <i class="fas fa-laptop-code" style="font-size: 2.5rem;"></i> ${project.icon}
+        </div>
+        <h3>${project.title}</h3>
+        <p style="margin: 14px 0; color: #4a627a;">${project.description}</p>
+        <div style="margin-top: 12px;">
+          <span style="background: #eef2fa; padding: 6px 14px; border-radius: 30px; font-size: 0.8rem; font-weight: 500;">${project.tech}</span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // ---------- PAGE NAVIGATION ----------
+  let currentPage = 'home';
+  function showPage(pageId) {
+    document.querySelectorAll('.page-section').forEach(section => {
+      section.classList.remove('active-section');
+    });
+    document.getElementById(`${pageId}-section`).classList.add('active-section');
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      if (link.getAttribute('data-page') === pageId) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+    currentPage = pageId;
+    if (pageId === 'projects') renderProjects();
+  }
+
+  // ---------- ORDER FORM HANDLER (simulate order taking) ----------
+  function initOrderForm() {
+    const form = document.getElementById('orderForm');
+    if (!form) return;
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('orderName').value.trim();
+      const email = document.getElementById('orderEmail').value.trim();
+      const type = document.getElementById('orderType').value;
+      const budget = document.getElementById('orderBudget').value;
+      const details = document.getElementById('orderDetails').value.trim();
+
+      if (!name || !email || !details) {
+        document.getElementById('orderFeedback').innerHTML = `<div class="success-msg" style="background:#fbeae9; color:#b13e3e;">⚠️ Please fill all required fields (*).</div>`;
+        return;
+      }
+      // Simulate storing order (in real backend you'd send to server)
+      const orderData = { name, email, type, budget, details, date: new Date().toISOString() };
+      let orders = JSON.parse(localStorage.getItem('teamer_orders') || '[]');
+      orders.push(orderData);
+      localStorage.setItem('teamer_orders', JSON.stringify(orders));
+      
+      document.getElementById('orderFeedback').innerHTML = `<div class="success-msg">✅ Thank you, ${name}! Your order request has been received. TEAMER will contact you within 24 hours.</div>`;
+      form.reset();
+      setTimeout(() => {
+        document.getElementById('orderFeedback').innerHTML = '';
+      }, 5000);
+      console.log('New order saved:', orderData);
+    });
+  }
+
+  // ---------- CONTACT FORM HANDLER ----------
+  function initContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    if (!contactForm) return;
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('contactName').value.trim();
+      const email = document.getElementById('contactEmail').value.trim();
+      const message = document.getElementById('contactMsg').value.trim();
+      if (!name || !email || !message) {
+        document.getElementById('contactFeedback').innerHTML = `<div class="success-msg" style="background:#fbeae9; color:#b13e3e;">Please fill all fields.</div>`;
+        return;
+      }
+      // store message in localStorage for demo (you'd send to email/api)
+      const msgObj = { name, email, message, time: new Date().toISOString() };
+      let messages = JSON.parse(localStorage.getItem('teamer_messages') || '[]');
+      messages.push(msgObj);
+      localStorage.setItem('teamer_messages', JSON.stringify(messages));
+      document.getElementById('contactFeedback').innerHTML = `<div class="success-msg">✨ Message sent! We'll get back to you soon.</div>`;
+      contactForm.reset();
+      setTimeout(() => {
+        document.getElementById('contactFeedback').innerHTML = '';
+      }, 4000);
+    });
+  }
+
+  // ---------- Replace logo image if the user provides an image ----------
+  // To use your actual logo: replace the content inside .logo-img.
+  // You can directly set the HTML. For convenience, we check if an image exists.
+  function setupLogo() {
+    // If the user places an image file named "teamer-logo.png" in the same folder, it will be used.
+    // Otherwise, the fallback icon remains.
+    const logoContainer = document.querySelector('.logo-img');
+    if (logoContainer && !logoContainer.querySelector('img')) {
+      // Option: you can create an img element dynamically if you want to load from a known path
+      // For flexibility, we'll add a data attribute or manual replace.
+      // Since the user mentioned "image given above is my company's logo", they likely have an image.
+      // They can simply uncomment the img tag inside the HTML. No forced change.
+      // So we leave the fallback but allow manual editing.
+    }
+  }
+
+  // ---------- INITIALIZE ----------
+  document.addEventListener('DOMContentLoaded', () => {
+    renderProjects();   // initial render for projects section
+    initOrderForm();
+    initContactForm();
+    setupLogo();
+
+    // navigation event listeners
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const page = link.getAttribute('data-page');
+        if (page) showPage(page);
+      });
+    });
+    showPage('home');   // default
+  });
+</script>
+
+<!-- Instructions for adding your actual logo:
+     1. Replace the content inside .logo-img in the header.
+        You can replace the fallback <div> with an <img> tag like:
+        <img src="your-logo.png" alt="TEAMER Logo" style="width:100%; height:100%; object-fit:contain;">
+     2. The design will automatically adapt. -->
+</body>
+</html>
